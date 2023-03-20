@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.innerContainer {
+  padding: 50px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tableAndActionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border-neutral);
+  border-radius: 8px;
+  min-width: 1000px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.userTable {
+  width: 100%;
+}
+
+.userTableHeader {
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 153%;
+  padding-bottom: 10px;
+}
+
+.userListItem {
+  padding: 8px 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 143%;
+  text-align: start;
+}
+
+.actionButtonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
