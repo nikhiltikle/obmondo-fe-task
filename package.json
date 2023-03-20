@@ -1,6 +1,7 @@
 {
   "name": "obmondo-task",
   "version": "0.1.0",
+  "homepage": "http://Madhavkabra.github.io/obmondo-task",
   "private": true,
   "dependencies": {
     "@types/node": "^16.18.16",
