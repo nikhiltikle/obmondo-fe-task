@@ -1,0 +1,23 @@
+.button {
+  padding: 8px 12px;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  line-height: 143%;
+  font-family: 500;
+  color: var(--white);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  background-color: var(--bg-primary);
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:disabled {
+  background-color: var(--bg-neutral-faded);
+  color: var(--foreground-neutral);
+  pointer-events: none;
+}
