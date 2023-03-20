@@ -16,11 +16,11 @@ export const UsersList = () => {
   };
 
   const handlePreviousButtonClick = () => {
-    setPageCount((count) => count - 1);
+    setPageCount(Number(users[0].ID) - 11);
   };
 
   const handleNextButtonClick = () => {
-    setPageCount((count) => count + 1);
+    setPageCount(Number(users[9].ID));
   };
 
   useEffect(() => {
