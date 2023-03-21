@@ -1,99 +1,96 @@
-import { useEffect, useState } from 'react';
-import { Container } from '../Container';
 import { User } from '../../interfaces/User';
-import { getUsers } from '../../apis/users/getUsers';
 import { Button } from '../Button';
 import { Divider } from '../Divider';
 import styles from './styles.module.css';
 
-export const UsersList = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [pageCount, setPageCount] = useState(0);
+interface UsersListProps {
+  users: User[];
+  pageCount: number;
+  handlePreviousButtonClick: React.MouseEventHandler<HTMLButtonElement>;
+  handleNextButtonClick: React.MouseEventHandler<HTMLButtonElement>;
+}
 
-  const fetchUsers = async () => {
-    const usersRes = await getUsers(pageCount);
-    setUsers(usersRes);
-  };
-
-  const handlePreviousButtonClick = () => {
-    setPageCount(Number(users[0].ID) - 11);
-  };
-
-  const handleNextButtonClick = () => {
-    setPageCount(Number(users[9].ID));
-  };
-
-  useEffect(() => {
-    fetchUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageCount]);
-
+export const UsersList = ({
+  users,
+  pageCount,
+  handlePreviousButtonClick,
+  handleNextButtonClick,
+}: UsersListProps) => {
   return (
-    <Container>
-      <div className={styles.container}>
-        <div className={styles.innerContainer}>
-          <div className={styles.tableAndActionWrapper}>
-            <table className={styles.userTable}>
-              <thead>
-                <tr>
-                  <td
-                    width='10%'
-                    className={styles.userTableHeader}
-                  >
-                    Sr. No.
+    <div className={styles.container}>
+      <div className={styles.innerContainer}>
+        <div className={styles.tableAndActionWrapper}>
+          <p className={styles.tableTitleText}>Users</p>
+
+          <Divider />
+
+          <table className={styles.userTable}>
+            <thead>
+              <tr>
+                <td
+                  width='10%'
+                  className={styles.userTableHeader}
+                >
+                  Sr. No.
+                </td>
+                <td
+                  width='20%'
+                  className={styles.userTableHeader}
+                >
+                  Name
+                </td>
+                <td
+                  width='15%'
+                  className={styles.userTableHeader}
+                >
+                  Phone
+                </td>
+                <td
+                  width='25%'
+                  className={styles.userTableHeader}
+                >
+                  Email
+                </td>
+                <td
+                  width='15%'
+                  className={styles.userTableHeader}
+                >
+                  Job Title
+                </td>
+                <td
+                  width='15%'
+                  className={styles.userTableHeader}
+                >
+                  Company
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              {users.slice(0, 10).map((user, index: number) => (
+                <tr key={user.ID}>
+                  <td className={styles.userListItem}>{index + 1}</td>
+                  <td className={styles.userListItem}>
+                    {user.FirstNameLastName}
                   </td>
-                  <td
-                    width='20%'
-                    className={styles.userTableHeader}
-                  >
-                    Name
-                  </td>
-                  <td
-                    width='15%'
-                    className={styles.userTableHeader}
-                  >
-                    Phone
-                  </td>
-                  <td
-                    width='25%'
-                    className={styles.userTableHeader}
-                  >
-                    Email
-                  </td>
-                  <td
-                    width='15%'
-                    className={styles.userTableHeader}
-                  >
-                    Job Title
-                  </td>
-                  <td
-                    width='15%'
-                    className={styles.userTableHeader}
-                  >
-                    Company
-                  </td>
+                  <td className={styles.userListItem}>{user.Phone}</td>
+                  <td className={styles.userListItem}>{user.Email}</td>
+                  <td className={styles.userListItem}>{user.JobTitle}</td>
+                  <td className={styles.userListItem}>{user.Company}</td>
                 </tr>
-              </thead>
+              ))}
+            </tbody>
+          </table>
 
-              <tbody>
-                {users.slice(0, 10).map((user, index: number) => (
-                  <tr key={user.ID}>
-                    <td className={styles.userListItem}>{index + 1}</td>
-                    <td className={styles.userListItem}>
-                      {user.FirstNameLastName}
-                    </td>
-                    <td className={styles.userListItem}>{user.Phone}</td>
-                    <td className={styles.userListItem}>{user.Email}</td>
-                    <td className={styles.userListItem}>{user.JobTitle}</td>
-                    <td className={styles.userListItem}>{user.Company}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <Divider />
 
-            <Divider />
-
-            <div className={styles.actionButtonContainer}>
+          <div className={styles.actionButtonContainer}>
+            <div>
+              <p className={styles.currentPageText}>
+                Current Page: {(pageCount % 9) + 1}
+              </p>
+            </div>
+            <div className={styles.navigationButtonContainer}>
               <Button
                 title='Previous'
                 disabled={pageCount <= 0}
@@ -107,6 +104,6 @@ export const UsersList = () => {
           </div>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
